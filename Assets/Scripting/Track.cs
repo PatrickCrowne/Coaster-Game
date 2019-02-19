@@ -41,27 +41,15 @@ public class Track : MonoBehaviour
 		
 		path.transform.position = spline.bezier(t);
 		
-		if (Input.GetButtonDown("Fire1"))
-		{
-		
-			// Make a ray
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			
-			//	Find where it lands
-			if (Physics.Raycast(ray, out hit, 10000))
-			{
-				// Add Node to list of nodes
-				spline.addNode(Instantiate(node, hit.point, hit.transform.rotation));
-				
-				// Move clip plane, if needed
-				//clipPlane.transform.position = new Vector3(0,0,(int)hit.distance-99);
-				
-			}
-			
-			trackModel.generateTrackModel(spline, 8);
-			
-		}
-		
     }
+	
+	public void addNode(RaycastHit hit)
+	{
+		spline.addNode(Instantiate(node, hit.point, hit.transform.rotation));
+	}
+	
+	public void updateTrack()
+	{
+		trackModel.generateTrackModel(spline, 8);
+	}
 }

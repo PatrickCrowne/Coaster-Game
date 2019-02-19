@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripting\Spline.cs" />
      <Compile Include="Assets\Scripting\Track.cs" />
      <Compile Include="Assets\Scripting\TrackModel.cs" />
+     <None Include="Assets\todo.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/patri/Documents/GitHub/Coaster-Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
