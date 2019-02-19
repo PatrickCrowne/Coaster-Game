@@ -9,12 +9,15 @@ public class TrackModel : MonoBehaviour
 	
 	private List<GameObject> ties = new List<GameObject>();
 	private Rail spine;
- 
-	public TrackModel()
+	private Material material;
+	
+	public TrackModel(Material m)
 	{
 		
+		material = m;
+		
 		crosstie = GameObject.Find("Crosstie");
-		spine = new Rail(ties, 4);
+		spine = new Rail(ties, 4, m);
 		
 	}
 	
@@ -43,7 +46,6 @@ public class TrackModel : MonoBehaviour
 		for (int i = 0; i < ties.Count-1; i++)
 		{
 			
-			//ties[i].transform.LookAt(ties[i+1].transform);
 			Vector3 a = ties[i].transform.position;
 			Vector3 b = ties[i+1].transform.position;
 			
@@ -60,7 +62,7 @@ public class TrackModel : MonoBehaviour
 			
 		}
 		
-		spine = new Rail(ties, 4);
+		spine = new Rail(ties, 4, material);
 		
 	}
 	

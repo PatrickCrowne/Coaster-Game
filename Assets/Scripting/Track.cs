@@ -8,6 +8,7 @@ public class Track : MonoBehaviour
 	//	Default Object
 	public GameObject node;
 	public GameObject path;
+	public Material mat;
 	
 	//	Coaster Objects
 	private GameObject clipPlane;
@@ -20,7 +21,7 @@ public class Track : MonoBehaviour
     {
         
 		clipPlane = GameObject.Find("ClipPlane");
-		trackModel = new TrackModel();
+		trackModel = new TrackModel(mat);
 		
     }
 

@@ -108,17 +108,29 @@ public class Rail : MonoBehaviour
 		gameObject.transform.localScale = new Vector3(1,1,1);
 		
 		gameObject.GetComponent<MeshFilter>().mesh = mesh;
-		gameObject.GetComponent<MeshFilter>().mesh.uv = uv;
+		gameObject.GetComponent<Renderer>().material = mat;
 		
 	}
 	
-	public Rail(List<GameObject> ties, int lod)
+	public Rail(List<GameObject> ties, int lod, Material m)
 	{
+		
+		mat = m;
 		
 		makeFace(ties, "R", -0.2f, -0.2f, -0.2f, -0.7f);
 		makeFace(ties, "D", -0.2f, -0.7f, 0.2f, -0.7f);
 		makeFace(ties, "L", 0.2f, -0.7f, 0.2f, -0.2f);
 		makeFace(ties, "U", 0.2f, -0.2f, -0.2f, -0.2f);
+		
+		makeFace(ties, "RailRR", -0.05f + 0.6f, 0.05f, -0.05f + 0.6f, -0.05f);
+		makeFace(ties, "RailRD", -0.05f + 0.6f, -0.05f, 0.05f + 0.6f, -0.05f);
+		makeFace(ties, "RailRL", 0.05f + 0.6f, -0.05f, 0.05f + 0.6f, 0.05f);
+		makeFace(ties, "RailRU", 0.05f + 0.6f, 0.05f, -0.05f + 0.6f, 0.05f);
+		
+		makeFace(ties, "RailLR", -0.05f - 0.6f, 0.05f, -0.05f - 0.6f, -0.05f);
+		makeFace(ties, "RailLD", -0.05f - 0.6f, -0.05f, 0.05f - 0.6f, -0.05f);
+		makeFace(ties, "RailLL", 0.05f - 0.6f, -0.05f, 0.05f - 0.6f, 0.05f);
+		makeFace(ties, "RailLU", 0.05f - 0.6f, 0.05f, -0.05f - 0.6f, 0.05f);
 		
 	}
 	
