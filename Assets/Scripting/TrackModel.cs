@@ -6,12 +6,15 @@ public class TrackModel : MonoBehaviour
 {
  
 	public GameObject crosstie;
+	
 	private List<GameObject> ties = new List<GameObject>();
+	private Rail spine;
  
 	public TrackModel()
 	{
 		
 		crosstie = GameObject.Find("Crosstie");
+		spine = new Rail(ties, 4);
 		
 	}
 	
@@ -34,12 +37,30 @@ public class TrackModel : MonoBehaviour
 			
 			
 		}
+		
+		// Tilt
+		Vector3 lastRight = new Vector3();
 		for (int i = 0; i < ties.Count-1; i++)
 		{
 			
-			ties[i].transform.LookAt(ties[i+1].transform);
+			if (i == 0) {
+				
+				ties[i].transform.LookAt(ties[i+1].transform);	
+				
+			} else {
+				
+				ties[i].transform.LookAt(ties[i+1].transform);	
+				
+				ties[i].transform.up = Vector3.Cross(lastRight, ties[i].transform.forward);
+				ties[i].transform.right = Vector3.Cross(ties[i].transform.right, ties[i].transform.forward);
+				
+			}
+			
+			lastRight = ties[i].transform.right;
 			
 		}
+		
+		spine = new Rail(ties, 4);
 		
 	}
 	

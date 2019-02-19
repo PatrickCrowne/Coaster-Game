@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripting\Node.cs" />
+     <Compile Include="Assets\Scripting\Rail.cs" />
      <Compile Include="Assets\Scripting\Spline.cs" />
      <Compile Include="Assets\Scripting\Track.cs" />
      <Compile Include="Assets\Scripting\TrackModel.cs" />
