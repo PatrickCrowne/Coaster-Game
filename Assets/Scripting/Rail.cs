@@ -7,6 +7,7 @@ public class Rail : MonoBehaviour
 	
 	Mesh mesh;
 	GameObject gameObject;
+	Material mat;
 	
 	public Vector3 rotateX(Vector3 v, float rot)
 	{
@@ -41,15 +42,38 @@ public class Rail : MonoBehaviour
 		
 	}
 	
-	public Rail(List<GameObject> ties, int lod)
+	public Vector3 getVertexPosition(float x, float y, float z, Vector3 up, Vector3 right, Vector3 forward)
+	{
+	
+		Vector3 u = up;
+		u.x *= y;
+		u.y *= y;
+		u.z *= y;
+		
+		Vector3 r = right;
+		r.x *= x;
+		r.y *= x;
+		r.z *= x;
+		
+		Vector3 f = forward;
+		f.x *= z;
+		f.y *= z;
+		f.z *= z;
+		
+		Vector3 output = new Vector3(u.x + r.x + f.x, u.y + r.y + f.y, u.z + r.z + f.z);
+		return output;
+		
+	}
+	
+	public void makeFace(List<GameObject> ties, string id, float x1, float y1, float x2, float y2)
 	{
 		
-		Destroy(GameObject.Find("Spine"));
+		Destroy(GameObject.Find("Spine" + id));
 		
 		mesh = new Mesh();
 		
 		Vector3[] vertices = new Vector3[2 * ties.Count];
-		Vector2[] uv = new Vector2[0];
+		Vector2[] uv = new Vector2[vertices.Length];
 		int[] triangles = new int[6 * ties.Count];
 		
 		for(int i = 0; i < ties.Count-1; i++)
@@ -59,24 +83,18 @@ public class Rail : MonoBehaviour
 		
 			Vector3 v;
 		
-			v = new Vector3(0.25f,-0.7f,0);
-			v = rotateZ(v, -ties[i].transform.eulerAngles.x / 180.0f * Mathf.PI);
-			//v = rotateY(v, -ties[i].transform.eulerAngles.x / 180.0f * Mathf.PI);
-			//v = rotateX(v, -ties[i].transform.eulerAngles.x / 180.0f * Mathf.PI);
+			v = getVertexPosition(x1, y1, 0.0f, ties[i].transform.up, ties[i].transform.right, ties[i].transform.forward);
 			
 			vertices[(i*2)] = new Vector3(pos.x + v.x,pos.y + v.y,pos.z + v.z);
 			
-			v = new Vector3(0.25f,-0.2f,0);
-			v = rotateZ(v, -ties[i].transform.eulerAngles.x / 180.0f * Mathf.PI);
-			//v = rotateY(v, -ties[i].transform.eulerAngles.x / 180.0f * Mathf.PI);
-			//v = rotateX(v, -ties[i].transform.eulerAngles.x / 180.0f * Mathf.PI);
+			v = getVertexPosition(x2, y2, 0.0f, ties[i].transform.up, ties[i].transform.right, ties[i].transform.forward);
 			
 			vertices[(i*2)+1] = new Vector3(pos.x + v.x,pos.y + v.y,pos.z + v.z);
 			
 			triangles[(i*6)] = 0 + (i*2);
 			triangles[(i*6)+1] = 1 + (i*2);
 			triangles[(i*6)+2] = 2 + (i*2);
-			triangles[(i*6)+3] = 2 + (i*2);
+			triangles[(i*6)+3] = 1 + (i*2);
 			triangles[(i*6)+4] = 3 + (i*2);
 			triangles[(i*6)+5] = 2 + (i*2);
 		
@@ -86,10 +104,21 @@ public class Rail : MonoBehaviour
 		mesh.uv = uv;
 		mesh.triangles = triangles;
 		
-		gameObject = new GameObject("Spine", typeof(MeshFilter), typeof(MeshRenderer));
+		gameObject = new GameObject("Spine" + id, typeof(MeshFilter), typeof(MeshRenderer));
 		gameObject.transform.localScale = new Vector3(1,1,1);
 		
 		gameObject.GetComponent<MeshFilter>().mesh = mesh;
+		gameObject.GetComponent<MeshFilter>().mesh.uv = uv;
+		
+	}
+	
+	public Rail(List<GameObject> ties, int lod)
+	{
+		
+		makeFace(ties, "R", -0.2f, -0.2f, -0.2f, -0.7f);
+		makeFace(ties, "D", -0.2f, -0.7f, 0.2f, -0.7f);
+		makeFace(ties, "L", 0.2f, -0.7f, 0.2f, -0.2f);
+		makeFace(ties, "U", 0.2f, -0.2f, -0.2f, -0.2f);
 		
 	}
 	

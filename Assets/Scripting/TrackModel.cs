@@ -39,24 +39,24 @@ public class TrackModel : MonoBehaviour
 		}
 		
 		// Tilt
-		Vector3 lastRight = new Vector3();
+		Vector3 last = new Vector3(0,1,0);
 		for (int i = 0; i < ties.Count-1; i++)
 		{
 			
-			if (i == 0) {
-				
-				ties[i].transform.LookAt(ties[i+1].transform);	
-				
-			} else {
-				
-				ties[i].transform.LookAt(ties[i+1].transform);	
-				
-				ties[i].transform.up = Vector3.Cross(lastRight, ties[i].transform.forward);
-				ties[i].transform.right = Vector3.Cross(ties[i].transform.right, ties[i].transform.forward);
-				
-			}
+			//ties[i].transform.LookAt(ties[i+1].transform);
+			Vector3 a = ties[i].transform.position;
+			Vector3 b = ties[i+1].transform.position;
 			
-			lastRight = ties[i].transform.right;
+			Vector3 forward = new Vector3(b.x-a.x, b.y-a.y, b.z-a.z);
+			forward.Normalize();
+			
+			Vector3 up = last;
+			
+			Quaternion rot = Quaternion.LookRotation(forward, up);
+			
+			ties[i].transform.rotation = rot;
+			
+			last = ties[i].transform.up;
 			
 		}
 		
