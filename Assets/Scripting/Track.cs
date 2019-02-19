@@ -59,7 +59,7 @@ public class Track : MonoBehaviour
 				
 			}
 			
-			trackModel.generateTrackModel(spline, 10);
+			trackModel.generateTrackModel(spline, 8);
 			
 		}
 		

@@ -76,7 +76,7 @@ public class Rail : MonoBehaviour
 		Vector2[] uv = new Vector2[vertices.Length];
 		int[] triangles = new int[6 * ties.Count];
 		
-		for(int i = 0; i < ties.Count-1; i++)
+		for(int i = 0; i < ties.Count; i++)
 		{
 		
 			Vector3 pos = ties[i].transform.position;
@@ -86,28 +86,36 @@ public class Rail : MonoBehaviour
 			v = getVertexPosition(x1, y1, 0.0f, ties[i].transform.up, ties[i].transform.right, ties[i].transform.forward);
 			
 			vertices[(i*2)] = new Vector3(pos.x + v.x,pos.y + v.y,pos.z + v.z);
+			uv[(i*2)] = new Vector2(0, 0);
+			uv[(i*2)+1] = new Vector2(0, 1);
 			
 			v = getVertexPosition(x2, y2, 0.0f, ties[i].transform.up, ties[i].transform.right, ties[i].transform.forward);
 			
 			vertices[(i*2)+1] = new Vector3(pos.x + v.x,pos.y + v.y,pos.z + v.z);
 			
-			triangles[(i*6)] = 0 + (i*2);
-			triangles[(i*6)+1] = 1 + (i*2);
-			triangles[(i*6)+2] = 2 + (i*2);
-			triangles[(i*6)+3] = 1 + (i*2);
-			triangles[(i*6)+4] = 3 + (i*2);
-			triangles[(i*6)+5] = 2 + (i*2);
+			if (i < ties.Count-1) {
+		
+				triangles[(i*6)] = 0 + (i*2);
+				triangles[(i*6)+1] = 1 + (i*2);
+				triangles[(i*6)+2] = 2 + (i*2);
+				triangles[(i*6)+3] = 1 + (i*2);
+				triangles[(i*6)+4] = 3 + (i*2);
+				triangles[(i*6)+5] = 2 + (i*2);
+			
+			}
 		
 		}
 		
 		mesh.vertices = vertices;
 		mesh.uv = uv;
 		mesh.triangles = triangles;
+		mesh.RecalculateNormals();
 		
 		gameObject = new GameObject("Spine" + id, typeof(MeshFilter), typeof(MeshRenderer));
 		gameObject.transform.localScale = new Vector3(1,1,1);
 		
 		gameObject.GetComponent<MeshFilter>().mesh = mesh;
+		gameObject.GetComponent<MeshFilter>().mesh.uv = uv;
 		gameObject.GetComponent<Renderer>().material = mat;
 		
 	}

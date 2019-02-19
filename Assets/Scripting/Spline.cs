@@ -48,6 +48,8 @@ public class Spline
 	public Vector3 bezier(float t)
 	{
 		
+		t -= 1.0f;
+		
 		Vector3 output = new Vector3(0,0,0);
 		
 		float distance = t % 1;
