@@ -28,6 +28,7 @@ public class TrackModel : MonoBehaviour
 		{
 			
 			Destroy(ties[i]);
+			ties.Remove(ties[i]);
 			
 		}
 		

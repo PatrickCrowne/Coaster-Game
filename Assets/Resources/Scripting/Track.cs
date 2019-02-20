@@ -5,9 +5,13 @@ using UnityEngine;
 public class Track : MonoBehaviour
 {
 	
+	// Constants
+	private int editDensity = 5;
+	
 	//	Default Object
 	public GameObject node;
 	public GameObject path;
+	public GameObject design;
 	public Material mat;
 	
 	//	Coaster Objects
@@ -51,6 +55,34 @@ public class Track : MonoBehaviour
 	}
 	
 	public void updateTrack()
+	{
+		
+		if (spline.nodeCount() > 1)
+		{
+		
+			for (int i = spline.nodeCount()*editDensity; i < track.Count; i++)
+			{
+				
+				Destroy(track[i]);
+				track.Remove(track[i]);
+				
+			}	
+			
+			for (int i = track.Count-1; i < spline.nodeCount()*editDensity; i++)
+			{
+				track.Add(Instantiate(design, spline.bezier((float) i / (float) editDensity), new Quaternion(0,0,0,0)));
+			}
+			
+			for (int i = 0; i < track.Count; i++)
+			{
+				track[i].transform.position = spline.bezier((float) i / (float) editDensity);
+			}
+		
+		}
+		
+	}
+	
+	public void buildTrackModel()
 	{
 		trackModel.generateTrackModel(spline, 8);
 	}

@@ -125,7 +125,6 @@ public class CameraScript : MonoBehaviour
 				Track trackScript = (Track) currentTrack.GetComponent(typeof(Track));
 				// Add Node to list of nodes
 				trackScript.addNode(hit);
-				// Update Track Model
 				trackScript.updateTrack();
 				
 			}
@@ -175,10 +174,10 @@ public class CameraScript : MonoBehaviour
 	void MoveNodes()
 	{
 		
+		Track trackScript = (Track) currentTrack.GetComponent(typeof(Track));
+	
 		if (currentNode != null)
 		{
-			
-			Track trackScript = (Track) currentTrack.GetComponent(typeof(Track));
 			
 			if (Input.GetKey("page up"))
 			{
@@ -217,6 +216,17 @@ public class CameraScript : MonoBehaviour
 		
 	}
 	
+	void ShortcutCommands()
+	{
+		//	Build
+		if (Input.GetKeyDown("b"))
+		{
+			Track trackScript = (Track) currentTrack.GetComponent(typeof(Track));
+			trackScript.buildTrackModel();
+		}
+		
+	}
+	
     // Update is called once per frame
     void Update()
     {
@@ -224,6 +234,7 @@ public class CameraScript : MonoBehaviour
 		MoveCamera();
 		SetViewMode();
 		MoveNodes();
+		ShortcutCommands();
 		
     }
 }
