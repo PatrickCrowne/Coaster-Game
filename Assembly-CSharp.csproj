@@ -53,12 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripting\CameraScript.cs" />
-     <Compile Include="Assets\Scripting\Node.cs" />
-     <Compile Include="Assets\Scripting\Rail.cs" />
-     <Compile Include="Assets\Scripting\Spline.cs" />
-     <Compile Include="Assets\Scripting\Track.cs" />
-     <Compile Include="Assets\Scripting\TrackModel.cs" />
+     <Compile Include="Assets\Resources\Scripting\CameraScript.cs" />
+     <Compile Include="Assets\Resources\Scripting\Node.cs" />
+     <Compile Include="Assets\Resources\Scripting\Rail.cs" />
+     <Compile Include="Assets\Resources\Scripting\Spline.cs" />
+     <Compile Include="Assets\Resources\Scripting\Track.cs" />
+     <Compile Include="Assets\Resources\Scripting\TrackModel.cs" />
      <None Include="Assets\todo.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/patri/Documents/GitHub/Coaster-Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

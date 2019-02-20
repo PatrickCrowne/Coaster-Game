@@ -6,7 +6,7 @@ public class Rail : MonoBehaviour
 {
 	
 	Mesh mesh;
-	GameObject gameObject;
+	GameObject railObject;
 	Material mat;
 	
 	public Vector3 rotateX(Vector3 v, float rot)
@@ -111,12 +111,12 @@ public class Rail : MonoBehaviour
 		mesh.triangles = triangles;
 		mesh.RecalculateNormals();
 		
-		gameObject = new GameObject("Spine" + id, typeof(MeshFilter), typeof(MeshRenderer));
-		gameObject.transform.localScale = new Vector3(1,1,1);
+		railObject = new GameObject("Spine" + id, typeof(MeshFilter), typeof(MeshRenderer));
+		railObject.transform.localScale = new Vector3(1,1,1);
 		
-		gameObject.GetComponent<MeshFilter>().mesh = mesh;
-		gameObject.GetComponent<MeshFilter>().mesh.uv = uv;
-		gameObject.GetComponent<Renderer>().material = mat;
+		railObject.GetComponent<MeshFilter>().mesh = mesh;
+		railObject.GetComponent<MeshFilter>().mesh.uv = uv;
+		railObject.GetComponent<Renderer>().material = mat;
 		
 	}
 	

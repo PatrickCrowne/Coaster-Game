@@ -33,13 +33,15 @@ public class Track : MonoBehaviour
         
 		t += 0.01f;
 		
-		if (t >= spline.nodeCount()) {
-			
+		if (t >= spline.nodeCount()) 
+		{
 			t = 0;
-			
 		}
 		
+		if (spline.nodeCount() > 0)
+		{
 		path.transform.position = spline.bezier(t);
+		}
 		
     }
 	

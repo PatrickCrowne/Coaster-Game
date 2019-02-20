@@ -1,6 +1,12 @@
-TODO:	
-	+ Node Selection
-	+ Node Deletion
+Short term:
+	~ Node Selection and Manipulation
+	+ Saving and Loading
 	+ Heartlining
 	+ Rolling
-	+ Saving and Loading
+Mid Term:
+	+ Supports with Taper
+Long Term:
+	+ Switch Tracks
+	+ Simulated Crashes
+	+ Flange Editor
+	+ Footer Editor
