@@ -11,16 +11,20 @@ public class Spline
 	{
 		
 		nodes.Add(new Node(o));
+		updateNodeTargets();
 		
+	}
+
+	public void updateNodeTargets()
+	{
 		for (int i = 0; i < nodeCount()-1; i++)
 		{
 			
 			nodes[i].setTarget(nodes[i+1]);
 			
 		}
-		
 	}
-
+	
 	public float getWeight(int point, float amount)
 	{
 		

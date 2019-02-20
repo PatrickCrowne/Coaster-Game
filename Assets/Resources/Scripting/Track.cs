@@ -60,6 +60,8 @@ public class Track : MonoBehaviour
 		if (spline.nodeCount() > 1)
 		{
 		
+			spline.updateNodeTargets();
+		
 			for (int i = spline.nodeCount()*editDensity; i < track.Count; i++)
 			{
 				
