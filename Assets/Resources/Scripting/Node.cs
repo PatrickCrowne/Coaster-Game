@@ -20,7 +20,7 @@ public class Node
 	public void setTarget(Node n)
 	{
 		
-		line.transform.localScale = new Vector3(1, 1, distance(n));
+		line.transform.localScale = new Vector3(1, 1, distance(n) * 2);
 		line.transform.LookAt(n.node.transform);
 		
 	}

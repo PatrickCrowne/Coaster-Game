@@ -49,10 +49,47 @@ public class Spline
 		
 	}
 	
-	public Vector3 bezier(float t)
+	public float squareDistance(Vector3 a, Vector3 b)
 	{
 		
-		t -= 1.0f;
+		return ((a.x-b.x)*(a.x-b.x)) + ((a.y-b.y)*(a.y-b.y)) + ((a.z-b.z)*(a.z-b.z));
+		
+	}
+	
+	public float getBezierTime(float dist)
+	{
+		
+		float interval = 0.01f;
+		float intervalSquared = interval*interval;
+		float time = 0.0f;
+		float totalDistance = 0.0f;
+		
+		Vector3 current = bezier(0.0f);
+		Vector3 last = bezier(0.0f);
+		
+		while (totalDistance < dist)
+		{
+		
+			while (squareDistance(current, last) < intervalSquared)
+			{
+				
+				time += 0.05f;
+				current = bezier(time);
+				
+			}
+		
+			last = bezier(time);
+			totalDistance += interval;
+		
+		
+		}
+		
+		return time;
+		
+	}
+	
+	public Vector3 bezier(float t)
+	{
 		
 		Vector3 output = new Vector3(0,0,0);
 		

@@ -29,22 +29,22 @@ public class Track : MonoBehaviour
 		
     }
 
-	float t;
-	
+	float distance = 0;
+	float bDistance = 0;
     // Update is called once per frame
     void Update()
     {
-        
-		t += 0.01f;
 		
-		if (t >= spline.nodeCount()) 
+		distance += 0.01f;
+		bDistance = spline.getBezierTime(distance);
+		if (bDistance >= spline.nodeCount()) 
 		{
-			t = 0;
+			distance = 0;
 		}
 		
 		if (spline.nodeCount() > 0)
 		{
-		path.transform.position = spline.bezier(t);
+			path.transform.position = spline.bezier(spline.getBezierTime(distance));
 		}
 		
     }
